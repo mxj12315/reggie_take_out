@@ -1,0 +1,53 @@
+# 指定端口
+server:
+  port: 8080
+---
+# 应用名称配置
+spring:
+  application:
+    #应用的名称，可选
+    name: desired_system
+---
+# druid数据源配置
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/reggie?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: min
+      password: 837850238
+---
+########################## mybatis #######################################
+mybatis-plus:
+  configuration:
+    #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
+    map-underscore-to-camel-case: true
+    # 日志实现
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 全局配置 id字段自增
+  global-config:
+    db-config:
+      id-type: ASSIGN_ID
+      # 配置逻辑删除字段
+      logic-delete-field: isDeleted # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+---
+# 热部署
+spring:
+  devtools:
+    livereload:
+      enabled: true  #是否支持livereload
+    restart:
+      enabled: true  #是否支持热加载
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    password: 32147
+
+---
+# 设置文件上传的路径
+reggieProject:
+  path: D:\img\
